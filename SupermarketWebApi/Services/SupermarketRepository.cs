@@ -60,58 +60,21 @@ namespace SupermarketWebApi.Services
             _context.SupermarketStocks.Remove(supermarketStock);
         }
 
-        public IEnumerable<Product> GetAllProductsFromSupermarket(int supermarketId)
+        public void UpdateProduct(int productId)
         {
-            var allStockWithSupermarketId = _context.SupermarketStocks
-                .Where(s => s.SupermarketId == supermarketId)
-                .ToList();
-
-            // enumerate through the entire product list once for every product the store stocks
-            var products = GetAllProducts();
-            List<Product> productsStockedBySupermarket = new List<Product>();
-            foreach (SupermarketStock ss in allStockWithSupermarketId)
-            {
-                foreach (Product p in products)
-                {
-                    if (ss.ProductId == p.ProductId)
-                    {
-                        productsStockedBySupermarket.Add(p);
-                        break;
-                    }
-                }
-            }
-
-            // then return that array
-            return productsStockedBySupermarket;
+            // No code in this implementation
         }
-        public IEnumerable<Supermarket> GetAllSupermarketsStockingProduct(int productId)
+        public void UpdateStaffMember(int staffMemberId)
         {
-            var allStockWithProductId = _context.SupermarketStocks
-                .Where(s => s.ProductId == productId)
-                .ToList();
-            
-            var supermarkets = GetAllSupermarkets();
-            List<Supermarket> supermarketsWithProduct = new List<Supermarket>();
-            foreach (SupermarketStock ss in allStockWithProductId)
-            {
-                foreach (Supermarket sm in supermarkets)
-                {
-                    if (ss.SupermarketId == sm.SupermarketId)
-                    {
-                        supermarketsWithProduct.Add(sm);
-                        break;
-                    }
-                }
-            }
-
-            return supermarketsWithProduct;
+            // No code in this implementation
         }
-        public IEnumerable<StaffMember> GettAllStaffMembersFromSuperMarket(int supermarketId)
+        public void UpdateSupermarket(int supermarketId)
         {
-            return _context.StaffMembers
-                .Where(s => s.SupermarketId == supermarketId)
-                .ToList();
-
+            // No code in this implementation
+        }
+        public void UpdateSupermarketStock(int supermarketStockId)
+        {
+            // No code in this implementation        
         }
 
         public IEnumerable<Supermarket> GetAllSupermarkets()
@@ -173,7 +136,7 @@ namespace SupermarketWebApi.Services
             return PagedList<Product>.Create(collectionBeforePaging,
                 productResourceParameters.PageNumber,
                 productResourceParameters.PageSize);
-        }
+        }        
         public PagedList<StaffMember> GetAllStaffMembers(StaffMemberResourceParameters staffMemberResourceParameters)
         {
             var collectionBeforePaging =
@@ -203,6 +166,65 @@ namespace SupermarketWebApi.Services
             return PagedList<SupermarketStock>.Create(collectionBeforePaging,
                 stockResourceParameters.PageNumber,
                 stockResourceParameters.PageSize);
+        }
+
+        public PagedList<Product> GetAllProductsFromSupermarket(int supermarketId, ProductResourceParameters productResourceParameters)
+        {
+            var allStockWithSupermarketId = _context.SupermarketStocks
+                .Where(s => s.SupermarketId == supermarketId)
+                .ToList();
+
+            // make a list of ints containing all productIds
+            var intList = new List<int>();
+            foreach (SupermarketStock ss in allStockWithSupermarketId)
+            {
+                intList.Add(ss.ProductId);
+            }
+
+            var productsFromRepo = _context.Products
+                .Where(p => intList.Contains(p.ProductId));
+
+
+            var collectionBeforePaging =
+                productsFromRepo.ApplySort(productResourceParameters.OrderBy,
+                _productPropertyMappingService.GetPropertyMapping<ProductDTO, Product>());
+
+            if (!string.IsNullOrEmpty(productResourceParameters.SearchQuery))
+            {
+                // trim & ignore casing
+                var searchQueryForWhereClause = productResourceParameters.SearchQuery
+                    .Trim().ToLowerInvariant();
+
+                collectionBeforePaging = collectionBeforePaging
+                    .Where(s => s.Name.ToLowerInvariant().Contains(searchQueryForWhereClause));
+            }
+
+            return PagedList<Product>.Create(collectionBeforePaging,
+                productResourceParameters.PageNumber,
+                productResourceParameters.PageSize);
+        }
+        public PagedList<StaffMember> GetAllStaffMembersFromSupermarket(int supermarketId, StaffMemberResourceParameters staffMemberResourceParameters)
+        {
+            var staffFromRepo = _context.StaffMembers
+                .Where(s => s.SupermarketId == supermarketId);
+
+            var collectionBeforePaging =
+                staffFromRepo.ApplySort(staffMemberResourceParameters.OrderBy,
+                _staffMemberPropertyMappingService.GetPropertyMapping<StaffMemberDTO, StaffMember>());
+
+            if (!string.IsNullOrEmpty(staffMemberResourceParameters.SearchQuery))
+            {
+                // trim & ignore casing
+                var searchQueryForWhereClause = staffMemberResourceParameters.SearchQuery
+                    .Trim().ToLowerInvariant();
+
+                collectionBeforePaging = collectionBeforePaging
+                    .Where(s => s.Name.ToLowerInvariant().Contains(searchQueryForWhereClause));
+            }
+
+            return PagedList<StaffMember>.Create(collectionBeforePaging,
+                staffMemberResourceParameters.PageNumber,
+                staffMemberResourceParameters.PageSize);
         }
 
         public Product GetProductById(int productId)
@@ -276,23 +298,6 @@ namespace SupermarketWebApi.Services
             return _context.SupermarketStocks.Any(s => s.ProductId == productId && s.SupermarketId == supermarketId && s.Id != id);
         }
 
-        public void UpdateProduct(int productId)
-        {
-            
-        }
-        public void UpdateStaffMember(int staffMemberId)
-        {
-            
-        }
-        public void UpdateSupermarket(int supermarketId)
-        {
-
-        }
-        public void UpdateSupermarketStock(int supermarketStockId)
-        {
-            
-        }
-
         public bool Save()
         {
                 return (_context.SaveChanges() >= 0);
@@ -323,6 +328,58 @@ namespace SupermarketWebApi.Services
                 .ToList();
         }
 
-        
+        //public IEnumerable<Product> GetAllProductsFromSupermarket(int supermarketId)
+        //{
+        //    var allStockWithSupermarketId = _context.SupermarketStocks
+        //        .Where(s => s.SupermarketId == supermarketId)
+        //        .ToList();
+
+        //    // enumerate through the entire product list once for every product the store stocks
+        //    var products = GetAllProducts();
+        //    List<Product> productsStockedBySupermarket = new List<Product>();
+        //    foreach (SupermarketStock ss in allStockWithSupermarketId)
+        //    {
+        //        foreach (Product p in products)
+        //        {
+        //            if (ss.ProductId == p.ProductId)
+        //            {
+        //                productsStockedBySupermarket.Add(p);
+        //                break;
+        //            }
+        //        }
+        //    }
+
+        //    // then return that array
+        //    return productsStockedBySupermarket;
+        //}
+        //public IEnumerable<Supermarket> GetAllSupermarketsStockingProduct(int productId)
+        //{
+        //    var allStockWithProductId = _context.SupermarketStocks
+        //        .Where(s => s.ProductId == productId)
+        //        .ToList();
+
+        //    var supermarkets = GetAllSupermarkets();
+        //    List<Supermarket> supermarketsWithProduct = new List<Supermarket>();
+        //    foreach (SupermarketStock ss in allStockWithProductId)
+        //    {
+        //        foreach (Supermarket sm in supermarkets)
+        //        {
+        //            if (ss.SupermarketId == sm.SupermarketId)
+        //            {
+        //                supermarketsWithProduct.Add(sm);
+        //                break;
+        //            }
+        //        }
+        //    }
+
+        //    return supermarketsWithProduct;
+        //}
+        //public IEnumerable<StaffMember> GettAllStaffMembersFromSuperMarket(int supermarketId)
+        //{
+        //    return _context.StaffMembers
+        //        .Where(s => s.SupermarketId == supermarketId)
+        //        .ToList();
+
+        //}
     }
 }

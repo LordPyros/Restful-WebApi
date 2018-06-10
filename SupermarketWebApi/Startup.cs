@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Newtonsoft.Json.Serialization;
+using AspNetCoreRateLimit;
+using System.Collections.Generic;
 
 namespace SupermarketWebApi
 {
@@ -65,10 +67,50 @@ namespace SupermarketWebApi
             services.AddTransient<IStockPropertyMappingService, StockPropertyMappingService>();
 
             services.AddTransient<ITypeHelperService, TypeHelperService>();
+
+            services.AddHttpCacheHeaders(
+                (expirationModelOptions)
+                =>
+                {
+                    expirationModelOptions.MaxAge = 600;
+                },
+                (validationModelOptions)
+                =>
+                {
+                    validationModelOptions.AddMustRevalidate = true;
+                });
+
+            services.AddResponseCaching();
+
+            services.AddMemoryCache();
+
+
+            services.Configure<IpRateLimitOptions>((options) =>
+            {
+                options.GeneralRules = new List<RateLimitRule>()
+                {
+                    new RateLimitRule()
+                    {
+                        Endpoint = "*",
+                        Limit = 100,
+                        Period = "10m"
+                    },
+                    new RateLimitRule()
+                    {
+                        Endpoint = "*",
+                        Limit = 5,
+                        Period = "5s"
+                    }
+                };
+            });
+
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env )
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -103,7 +145,15 @@ namespace SupermarketWebApi
                 cfg.CreateMap<DTO.ProductForUpdateDTO, Models.Product>();
                 cfg.CreateMap<DTO.StaffMemberForUpdateDTO, Models.StaffMember>();
                 cfg.CreateMap<DTO.SupermarketStockForUpdateDTO, Models.SupermarketStock>();
+                cfg.CreateMap<Models.Supermarket, DTO.SupermarketForUpdateDTO>();
+
             });
+
+            app.UseIpRateLimiting();
+
+            app.UseResponseCaching();
+
+            app.UseHttpCacheHeaders();
 
             app.UseMvc();
         }

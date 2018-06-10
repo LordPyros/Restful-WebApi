@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SupermarketWebApi.DTO;
@@ -169,10 +170,18 @@ namespace SupermarketWebApi.Controllers
 
             // map and return stock
             var stock = Mapper.Map<SupermarketStockDTO>(stockFromRepo);
-            return Ok(stock.ShapeData(fields));
+            
+            var links = CreateLinksForSupermarketStock(id, fields);
+
+            var linkedResourceToReturn = stock.ShapeData(fields)
+                as IDictionary<string, object>;
+
+            linkedResourceToReturn.Add("links", links);
+
+            return Ok(linkedResourceToReturn);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateStock")]
         public IActionResult CreateSupermarketStock([FromBody] SupermarketStockForCreationDTO stock)
         {
             // check a new stock was passed in
@@ -198,9 +207,16 @@ namespace SupermarketWebApi.Controllers
             if (!_supermarketRepository.Save())
                 throw new Exception("Creating stock failed on Save.");
 
-            // map and return newly created stock
             var stockToReturn = Mapper.Map<SupermarketStockDTO>(stockEntity);
-            return CreatedAtRoute("GetStock", new { id = stockToReturn.Id }, stockToReturn);
+
+            var links = CreateLinksForSupermarketStock(stockToReturn.Id, null);
+
+            var linkedResourceToReturn = stockToReturn.ShapeData(null)
+                as IDictionary<string, object>;
+
+            linkedResourceToReturn.Add("links", links);
+
+            return CreatedAtRoute("GetStock", new { id = linkedResourceToReturn["Id"] }, linkedResourceToReturn);
         }
 
         [HttpPost("{id}")]
@@ -224,7 +240,7 @@ namespace SupermarketWebApi.Controllers
 
             // delete and save
             _supermarketRepository.DeleteSupermarketStock(supermarketStockFromRepo);
-            
+
             if (!_supermarketRepository.Save())
                 throw new Exception($"Deleting stock {id} failed on save.");
 
@@ -273,6 +289,36 @@ namespace SupermarketWebApi.Controllers
             return NoContent();
         }
 
+        [HttpPatch("{id}", Name = "PartiallyUpdateStock")]
+        public IActionResult PartiallyUpdateStock(int id,
+            [FromBody] JsonPatchDocument<SupermarketStockForUpdateDTO> patchDoc)
+        {
+            if (patchDoc == null)
+                return BadRequest();
+
+            var stockFromRepo = _supermarketRepository.GetStockById(id);
+            if (stockFromRepo == null)
+                return NotFound();
+
+            var stockToPatch = Mapper.Map<SupermarketStockForUpdateDTO>(stockFromRepo);
+
+            patchDoc.ApplyTo(stockToPatch, ModelState);
+
+            TryValidateModel(stockToPatch);
+
+            if (!ModelState.IsValid)
+                return new UnprocessableEntityObjectResult(ModelState);
+
+            Mapper.Map(stockToPatch, stockFromRepo);
+
+            _supermarketRepository.UpdateSupermarketStock(id);
+
+            if (!_supermarketRepository.Save())
+                throw new Exception($"Patching stock {id} failed on save.");
+
+            return NoContent();
+        }
+
         private IEnumerable<LinkDTO> CreateLinksForSupermarketStock(int id, string fields)
         {
             var links = new List<LinkDTO>();
@@ -293,13 +339,18 @@ namespace SupermarketWebApi.Controllers
             }
             links.Add(
                     new LinkDTO(_urlHelper.Link("DeleteStock", new { id }),
-                    "delete_staock",
+                    "delete_stock",
                     "DELETE"));
 
             links.Add(
                 new LinkDTO(_urlHelper.Link("UpdateStock", new { id }),
                 "update_stock",
-                "UPDATE"));
+                "PUT"));
+
+            links.Add(
+                new LinkDTO(_urlHelper.Link("PartiallyUpdateStock", new { id }),
+                "patch_stock",
+                "PATCH"));
 
             return links;
         }
@@ -369,6 +420,13 @@ namespace SupermarketWebApi.Controllers
                         pageSize = stockResourceParameters.PageSize
                     });
             }
+        }
+
+        [HttpOptions]
+        public IActionResult GetSupermarketStockOptions()
+        {
+            Response.Headers.Add("Allow", "GET,OPTIONS,POST");
+            return Ok();
         }
     }
 }

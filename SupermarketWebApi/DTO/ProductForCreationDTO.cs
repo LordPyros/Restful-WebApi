@@ -13,7 +13,7 @@ namespace SupermarketWebApi.DTO
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Product Price is required")]
-        [Range(0, 10000, ErrorMessage = "Price must be a number between 0 and 10,000")]
+        [Range(0.00, 10000, ErrorMessage = "Price must be a number between 0 and 10,000")]
         public double Price { get; set; }
     }
 }

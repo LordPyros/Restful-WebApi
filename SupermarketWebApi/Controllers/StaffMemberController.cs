@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SupermarketWebApi.DTO;
@@ -92,11 +93,11 @@ namespace SupermarketWebApi.Controllers
             else
             {
                 var previousPageLink = staffMembersFromRepo.HasPrevious ?
-                    CreateProductResourceUri(staffMemberResourceParameters,
+                    CreateStaffMemberResourceUri(staffMemberResourceParameters,
                     ResourceUriType.PreviousPage) : null;
 
                 var nextPageLink = staffMembersFromRepo.HasNext ?
-                    CreateProductResourceUri(staffMemberResourceParameters,
+                    CreateStaffMemberResourceUri(staffMemberResourceParameters,
                     ResourceUriType.NextPage) : null;
 
                 var paginationMetadata = new
@@ -116,45 +117,45 @@ namespace SupermarketWebApi.Controllers
             }
         }
 
-        private string CreateProductResourceUri(
-            StaffMemberResourceParameters staffMemberResourceParameters,
-            ResourceUriType type)
-        {
-            switch (type)
-            {
-                case ResourceUriType.PreviousPage:
-                    return _urlHelper.Link("GetStaffMembers",
-                      new
-                      {
-                          fields = staffMemberResourceParameters.Fields,
-                          orderBy = staffMemberResourceParameters.OrderBy,
-                          searchQuery = staffMemberResourceParameters.SearchQuery,
-                          pageNumber = staffMemberResourceParameters.PageNumber - 1,
-                          pageSize = staffMemberResourceParameters.PageSize
-                      });
-                case ResourceUriType.NextPage:
-                    return _urlHelper.Link("GetStaffMembers",
-                      new
-                      {
-                          fields = staffMemberResourceParameters.Fields,
-                          orderBy = staffMemberResourceParameters.OrderBy,
-                          searchQuery = staffMemberResourceParameters.SearchQuery,
-                          pageNumber = staffMemberResourceParameters.PageNumber + 1,
-                          pageSize = staffMemberResourceParameters.PageSize
-                      });
+        //private string CreateStaffMemberResourceUri(
+        //    StaffMemberResourceParameters staffMemberResourceParameters,
+        //    ResourceUriType type)
+        //{
+        //    switch (type)
+        //    {
+        //        case ResourceUriType.PreviousPage:
+        //            return _urlHelper.Link("GetStaffMembers",
+        //              new
+        //              {
+        //                  fields = staffMemberResourceParameters.Fields,
+        //                  orderBy = staffMemberResourceParameters.OrderBy,
+        //                  searchQuery = staffMemberResourceParameters.SearchQuery,
+        //                  pageNumber = staffMemberResourceParameters.PageNumber - 1,
+        //                  pageSize = staffMemberResourceParameters.PageSize
+        //              });
+        //        case ResourceUriType.NextPage:
+        //            return _urlHelper.Link("GetStaffMembers",
+        //              new
+        //              {
+        //                  fields = staffMemberResourceParameters.Fields,
+        //                  orderBy = staffMemberResourceParameters.OrderBy,
+        //                  searchQuery = staffMemberResourceParameters.SearchQuery,
+        //                  pageNumber = staffMemberResourceParameters.PageNumber + 1,
+        //                  pageSize = staffMemberResourceParameters.PageSize
+        //              });
 
-                default:
-                    return _urlHelper.Link("GetStaffMembers",
-                    new
-                    {
-                        fields = staffMemberResourceParameters.Fields,
-                        orderBy = staffMemberResourceParameters.OrderBy,
-                        searchQuery = staffMemberResourceParameters.SearchQuery,
-                        pageNumber = staffMemberResourceParameters.PageNumber,
-                        pageSize = staffMemberResourceParameters.PageSize
-                    });
-            }
-        }
+        //        default:
+        //            return _urlHelper.Link("GetStaffMembers",
+        //            new
+        //            {
+        //                fields = staffMemberResourceParameters.Fields,
+        //                orderBy = staffMemberResourceParameters.OrderBy,
+        //                searchQuery = staffMemberResourceParameters.SearchQuery,
+        //                pageNumber = staffMemberResourceParameters.PageNumber,
+        //                pageSize = staffMemberResourceParameters.PageSize
+        //            });
+        //    }
+        //}
 
         [HttpGet("{id}", Name = "GetStaffMember")]
         public IActionResult GetStaffMember(int id, [FromQuery] string fields)
@@ -172,7 +173,15 @@ namespace SupermarketWebApi.Controllers
 
             // map and return data
             var staffMember = Mapper.Map<StaffMemberDTO>(staffMemberFromRepo);
-            return Ok(staffMember.ShapeData(fields));
+
+            var links = CreateLinksForStaffMember(id, fields);
+
+            var linkedResourceToReturn = staffMember.ShapeData(fields)
+                as IDictionary<string, object>;
+
+            linkedResourceToReturn.Add("links", links);
+
+            return Ok(linkedResourceToReturn);
         }
 
         [HttpPost]
@@ -201,7 +210,14 @@ namespace SupermarketWebApi.Controllers
 
             var staffMemberToReturn = Mapper.Map<StaffMemberDTO>(staffMemberEntity);
 
-            return CreatedAtRoute("GetStaffMember", new { id = staffMemberToReturn.Id }, staffMemberToReturn);
+            var links = CreateLinksForStaffMember(staffMemberToReturn.Id, null);
+
+            var linkedResourceToReturn = staffMemberToReturn.ShapeData(null)
+                as IDictionary<string, object>;
+
+            linkedResourceToReturn.Add("links", links);
+
+            return CreatedAtRoute("GetStaffMember", new { id = linkedResourceToReturn["Id"] }, linkedResourceToReturn);
         }
 
         [HttpPost("{id}")]
@@ -260,6 +276,36 @@ namespace SupermarketWebApi.Controllers
             return NoContent();
         }
 
+        [HttpPatch("{id}", Name = "PartiallyUpdateStaffMember")]
+        public IActionResult PartiallyUpdateStaffMember(int id,
+            [FromBody] JsonPatchDocument<StaffMemberForUpdateDTO> patchDoc)
+        {
+            if (patchDoc == null)
+                return BadRequest();
+
+            var staffMemberFromRepo = _supermarketRepository.GetStaffMemberById(id);
+            if (staffMemberFromRepo == null)
+                return NotFound();
+
+            var staffMemberToPatch = Mapper.Map<StaffMemberForUpdateDTO>(staffMemberFromRepo);
+
+            patchDoc.ApplyTo(staffMemberToPatch, ModelState);
+
+            TryValidateModel(staffMemberToPatch);
+
+            if (!ModelState.IsValid)
+                return new UnprocessableEntityObjectResult(ModelState);
+
+            Mapper.Map(staffMemberToPatch, staffMemberFromRepo);
+
+            _supermarketRepository.UpdateStaffMember(id);
+
+            if (!_supermarketRepository.Save())
+                throw new Exception($"Patching staff member {id} failed on save.");
+
+            return NoContent();
+        }
+
         private IEnumerable<LinkDTO> CreateLinksForStaffMember(int id, string fields)
         {
             var links = new List<LinkDTO>();
@@ -286,7 +332,12 @@ namespace SupermarketWebApi.Controllers
             links.Add(
                 new LinkDTO(_urlHelper.Link("UpdateStaffMember", new { id }),
                 "update_staff_member",
-                "UPDATE"));
+                "PUT"));
+
+            links.Add(
+                new LinkDTO(_urlHelper.Link("PartiallyUpdateStaffMember", new { id }),
+                "patch_staff_member",
+                "PATCH"));
 
             return links;
         }
@@ -359,6 +410,13 @@ namespace SupermarketWebApi.Controllers
                         pageSize = staffMemberResourceParameters.PageSize
                     });
             }
+        }
+
+        [HttpOptions]
+        public IActionResult GetStaffMembersOptions()
+        {
+            Response.Headers.Add("Allow", "GET,OPTIONS,POST");
+            return Ok();
         }
     }
 }

@@ -24,9 +24,12 @@ namespace SupermarketWebApi.Services
         IEnumerable<StaffMember> GetStaffMembersByIds(IEnumerable<int> staffMemberIds);
         IEnumerable<SupermarketStock> GetSupermarketStockByIds(IEnumerable<int> supermarketStockIds);
 
-        IEnumerable<Product> GetAllProductsFromSupermarket(int supermarketId);
-        IEnumerable<StaffMember> GettAllStaffMembersFromSuperMarket(int supermarketId);
-        IEnumerable<Supermarket> GetAllSupermarketsStockingProduct(int productId);
+        //IEnumerable<Product> GetAllProductsFromSupermarket(int supermarketId);
+        //IEnumerable<StaffMember> GettAllStaffMembersFromSuperMarket(int supermarketId);
+        //IEnumerable<Supermarket> GetAllSupermarketsStockingProduct(int productId);
+
+        PagedList<Product> GetAllProductsFromSupermarket(int supermarketId, ProductResourceParameters productResourceParameters);
+        PagedList<StaffMember> GetAllStaffMembersFromSupermarket(int supermarketId, StaffMemberResourceParameters staffMemberResourceParameters);
 
         Supermarket GetSupermarketById(int supermarketId);
         Product GetProductById(int productId);

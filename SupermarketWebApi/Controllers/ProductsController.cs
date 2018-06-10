@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SupermarketWebApi.DTO;
@@ -169,13 +170,20 @@ namespace SupermarketWebApi.Controllers
             // check product exists
             if (productFromRepo == null)
                 return NotFound();
-
-            // map and return data
+           
             var product = Mapper.Map<ProductDTO>(productFromRepo);
-            return Ok(product.ShapeData(fields));
+
+            var links = CreateLinksForProduct(productId, fields);
+
+            var linkedResourceToReturn = product.ShapeData(fields)
+                as IDictionary<string, object>;
+
+            linkedResourceToReturn.Add("links", links);
+
+            return Ok(linkedResourceToReturn);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateProduct")]
         public IActionResult CreateProduct([FromBody] ProductForCreationDTO product)
         {
             if (product == null)
@@ -201,10 +209,17 @@ namespace SupermarketWebApi.Controllers
 
             var productToReturn = Mapper.Map<ProductDTO>(productEntity);
 
-            return CreatedAtRoute("GetProduct", new { id = productToReturn.ProductId }, productToReturn);
+            var links = CreateLinksForProduct(productToReturn.ProductId, null);
+
+            var linkedResourceToReturn = productToReturn.ShapeData(null)
+                as IDictionary<string, object>;
+
+            linkedResourceToReturn.Add("links", links);
+
+            return CreatedAtRoute("GetProduct", new { ProductId = linkedResourceToReturn["ProductId"] }, linkedResourceToReturn);
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("{productId}")]
         public IActionResult BlockProductCreation(int id)
         {
             if (_supermarketRepository.ProductExists(id))
@@ -258,6 +273,36 @@ namespace SupermarketWebApi.Controllers
             return NoContent();
         }
 
+        [HttpPatch("{productId}", Name = "PartiallyUpdateProduct")]
+        public IActionResult PartiallyUpdateProduct(int productId,
+            [FromBody] JsonPatchDocument<ProductForUpdateDTO> patchDoc)
+        {
+            if (patchDoc == null)
+                return BadRequest();
+
+            var productFromRepo = _supermarketRepository.GetProductById(productId);
+            if (productFromRepo == null)
+                return NotFound();
+
+            var productToPatch = Mapper.Map<ProductForUpdateDTO>(productFromRepo);
+
+            patchDoc.ApplyTo(productToPatch, ModelState);
+
+            TryValidateModel(productToPatch);
+
+            if (!ModelState.IsValid)
+                return new UnprocessableEntityObjectResult(ModelState);
+
+            Mapper.Map(productToPatch, productFromRepo);
+
+            _supermarketRepository.UpdateProduct(productId);
+
+            if (!_supermarketRepository.Save())
+                throw new Exception($"Patching product {productId} failed on save.");
+
+            return NoContent();
+        }
+
         private IEnumerable<LinkDTO> CreateLinksForProduct(int productId, string fields)
         {
             var links = new List<LinkDTO>();
@@ -284,7 +329,12 @@ namespace SupermarketWebApi.Controllers
             links.Add(
                 new LinkDTO(_urlHelper.Link("UpdateProduct", new { productId }),
                 "update_product",
-                "UPDATE"));
+                "PUT"));
+
+            links.Add(
+                new LinkDTO(_urlHelper.Link("PartiallyUpdateProduct", new { productId }),
+                "patch_product",
+                "PATCH"));
 
             return links;
         }
@@ -319,6 +369,11 @@ namespace SupermarketWebApi.Controllers
             return links;
         }
 
-
+        [HttpOptions]
+        public IActionResult GetProductsOptions()
+        {
+            Response.Headers.Add("Allow", "GET,OPTIONS,POST");
+            return Ok();
+        }
     }
 }
