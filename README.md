@@ -1,4 +1,4 @@
-This is a Restful WebApi I built for practice.
+This is an example of a Restful WebApi I built for practice.
 
 This project uses a Code first approach using Entity framework.
 HTTP Methods used (Get,Post,Put,Delete,Patch,Head,Options)
