@@ -6,12 +6,12 @@ HTTP Methods used (Get,Post,Put,Delete,Patch,Head,Options)
 Other features include:
 Data Validation,
 Logging,
-Paging and searching,
+Paging and Searching,
 Sorting and Data shaping,
 Hateoas,
 Additional Media Types,
-Caching,
-Rate Limiting.
+Caching
+and Rate Limiting.
 
 
 I Have included a script to reset and fill the database with sample data and also some postman requests.
