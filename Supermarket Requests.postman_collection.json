@@ -1,0 +1,2580 @@
+{
+	"info": {
+		"_postman_id": "fbaa4789-d41c-443d-b9e5-9d6ed5050d26",
+		"name": "Supermarket Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Supermarkets",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Supermarket (Valid Id)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Supermarket (Invalid Id)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Supermarket Products (Valid supermarket)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Supermarket Products (InValid supermarket)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/99/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"99",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Supermarket Staff (Valid supermarket)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/1/staffmembers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"1",
+						"staffmembers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Supermarket Staff (InValid supermarket)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/99/staffmembers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"99",
+						"staffmembers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Supermarket (Valid)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Cooly\",\n\t\"NumberOfStaff\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Supermarket (InValid No Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Supermarket (InValid Incomplete Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\"NumberOfStaff\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Supermarket (InValid Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Cooeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeely\",\n\t\"NumberOfStaff\" : \"763455\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Block Create Supermarket (Already exists)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Cooly\",\n\t\"NumberOfStaff\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Block Create Supermarket (Doesn't exists)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Cooly\",\n\t\"NumberOfStaff\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete stock from supermarket (Valid)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/1/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"1",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete stock from supermarket (InValid product doesn't exist)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/1/products/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"1",
+						"products",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete stock from supermarket (InValid supermarket doesn't exist)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/8/products/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"8",
+						"products",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete supermarket (Valid)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete supermarket (InValid supermarket doesn't exist)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\",\n\t\"ProductId\" : \"1\",\n\t\"NumberInStock\" : \"765\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update supermarket (Valid)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Palmy\",\n\t\"NumberOfStaff\" : \"357\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update supermarket (InValid No Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update supermarket (InValid incomplete Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NumberOfStaff\" : \"357\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update supermarket (InValid no supermarket)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Palmy\",\n\t\"NumberOfStaff\" : \"357\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update supermarket (InValid Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Paleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeemy\",\n\t\"NumberOfStaff\" : \"35567\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch Supermarket (Valid)",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n{\n\"op\": \"replace\",\n\"path\": \"/Location\",\n\"value\": \"Wooly\"\n}\n]"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch Supermarket (InValid SupermarketId)",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n{\n\"op\": \"replace\",\n\"path\": \"/Location\",\n\"value\": \"Wooly\"\n}\n]"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/supermarkets/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"supermarkets",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products (Valid)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Paleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeemy\",\n\t\"NumberOfStaff\" : \"35567\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product (Valid Id)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Paleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeemy\",\n\t\"NumberOfStaff\" : \"35567\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product (InValid Id)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Paleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeemy\",\n\t\"NumberOfStaff\" : \"35567\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product (Valid)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"twistys\",\n\t\"Price\" : \"0.34\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product (InValid No Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product (InValid incomplete Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Price\" : \"-0.34\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product (InValid Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"twisteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeys\",\n\t\"Price\" : -1\n}\n\t"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product (Valid)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Paleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeemy\",\n\t\"NumberOfStaff\" : \"35567\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product (InValid product doesn't exist)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Location\" : \"Paleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeemy\",\n\t\"NumberOfStaff\" : \"35567\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product (Valid)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Extra\",\n\t\"Price\" : \"0.90\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product (InValid product doesn't exist)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Extra\",\n\t\"Price\" : \"0.90\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product (InValid Incomplete Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Price\" : \"0.90\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product (InValid No Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product (InValid Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeextra\",\n\t\"Price\" : \"-1.90\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/products/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"products",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Staff Members (Valid)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Jamie\",\n\t\"\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Staff Member (Valid)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Staff Member (InValid staff member doesn't exist)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Staff Member (Valid)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Jules\",\n\t\"PhoneNumber\" : \"0400900900\",\n\t\"Address\" : \"999 Main St\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Staff Member (InValid No Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Staff Member (InValid incomplete Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Staff Member (InValid Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Juleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees\",\n\t\"PhoneNumber\" : \"04009009009999999999999999999999999999999999999999999999999999999999999999ghghcvbncvncvbncvncvnb\",\n\t\"Address\" : \"9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 Main St\",\n\t\"SupermarketId\" : \"99\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Staff Member (Valid)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Juleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees\",\n\t\"PhoneNumber\" : \"04009009009999999999999999999999999999999999999999999999999999999999999999ghghcvbncvncvbncvncvnb\",\n\t\"Address\" : \"9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 Main St\",\n\t\"SupermarketId\" : \"99\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Staff Member (InValid Staff member doesn't exist)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Juleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees\",\n\t\"PhoneNumber\" : \"04009009009999999999999999999999999999999999999999999999999999999999999999ghghcvbncvncvbncvncvnb\",\n\t\"Address\" : \"9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 Main St\",\n\t\"SupermarketId\" : \"99\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Staff Member (Valid)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Jules\",\n\t\"PhoneNumber\" : \"0400900900\",\n\t\"Address\" : \"999 Main St\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Staff Member (InValid Staff member doesn't exist)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Jules\",\n\t\"PhoneNumber\" : \"0400900900\",\n\t\"Address\" : \"999 Main St\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Staff Member (InValid Incomplete Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Staff Member (InValid No Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Staff Member (InValid Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Juleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee99999999eeeeeeeeeeeeeeeeeeeeeeeees\",\n\t\"PhoneNumber\" : \"0400900900eeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\n\t\"Address\" : \"99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 Main St\",\n\t\"SupermarketId\" : \"99\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/staffmembers/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"staffmembers",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Stock (Valid)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Juleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee99999999eeeeeeeeeeeeeeeeeeeeeeeees\",\n\t\"PhoneNumber\" : \"0400900900eeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\n\t\"Address\" : \"99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 Main St\",\n\t\"SupermarketId\" : \"99\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Stock (Valid)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Juleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee99999999eeeeeeeeeeeeeeeeeeeeeeeees\",\n\t\"PhoneNumber\" : \"0400900900eeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\n\t\"Address\" : \"99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 Main St\",\n\t\"SupermarketId\" : \"99\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Stock (InValid Stock doesn't exist)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\" : \"Juleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee99999999eeeeeeeeeeeeeeeeeeeeeeeees\",\n\t\"PhoneNumber\" : \"0400900900eeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\n\t\"Address\" : \"99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999 Main St\",\n\t\"SupermarketId\" : \"99\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Stock (Valid)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NumberInStock\" : \"99\",\n\t\"ProductId\" : \"3\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Stock (InValid Stock already exists)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NumberInStock\" : \"99\",\n\t\"ProductId\" : \"1\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Stock (InValid Supermarket doesn't exist)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NumberInStock\" : \"99\",\n\t\"ProductId\" : \"1\",\n\t\"SupermarketId\" : \"99\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Stock (InValid Product doesn't exist)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NumberInStock\" : \"99\",\n\t\"ProductId\" : \"99\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Stock (InValid Too much stock)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NumberInStock\" : \"9999999999\",\n\t\"ProductId\" : \"3\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Stock (InValid Incomplete Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Stock (InValid No Body)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Block Create Stock (Doesn't exist)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NumberInStock\" : \"99\",\n\t\"ProductId\" : \"3\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Block Create Stock (Already exists)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NumberInStock\" : \"99\",\n\t\"ProductId\" : \"3\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Stock (Valid)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NumberInStock\" : \"99\",\n\t\"ProductId\" : \"3\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Stock (InValid Stock doesn't exist)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NumberInStock\" : \"99\",\n\t\"ProductId\" : \"3\",\n\t\"SupermarketId\" : \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Stock (Valid)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 5,\n    \"supermarketId\": 1,\n    \"productId\": 14,\n    \"numberInStock\": 60\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Stock (Valid Same product and supermarket)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 5,\n    \"supermarketId\": 1,\n    \"productId\": 16,\n    \"numberInStock\": 80\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Stock (InValid Same stock already exists)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 5,\n    \"supermarketId\": 1,\n    \"productId\": 15,\n    \"numberInStock\": 80\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Stock (InValid No Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Stock (InValid Incomplete Body)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numberInStock\": 80\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Stock (InValid Stock doesn't exist)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 5,\n    \"supermarketId\": 1,\n    \"productId\": 15,\n    \"numberInStock\": 80\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/99",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Stock (InValid Supermarket doesn't exist)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 5,\n    \"supermarketId\": 10,\n    \"productId\": 15,\n    \"numberInStock\": 80\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Stock (InValid Product doesn't exist)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 5,\n    \"supermarketId\": 4,\n    \"productId\": 99,\n    \"numberInStock\": 80\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Stock (InValid Too much stock)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 5,\n    \"supermarketId\": 4,\n    \"productId\": 99,\n    \"numberInStock\": 800000000000000\n}"
+				},
+				"url": {
+					"raw": "http://localhost:63561/api/stock/20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63561",
+					"path": [
+						"api",
+						"stock",
+						"20"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
